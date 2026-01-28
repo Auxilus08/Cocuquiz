@@ -11,7 +11,7 @@ import Stats from './components/Stats';
 import Navbar from './components/Navbar';
 
 // Configure axios
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 axios.defaults.withCredentials = true;
 
 // Auth Context
