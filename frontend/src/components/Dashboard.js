@@ -2,8 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Container, Grid, Card, CardContent, Typography, Box, Button, Chip,
-    LinearProgress, CircularProgress, Alert, Tabs, Tab, ToggleButton, ToggleButtonGroup,
-    Paper
+    CircularProgress, Alert, Tabs, Tab, Paper
 } from '@mui/material';
 import {
     PlayArrow as PlayIcon,
@@ -11,7 +10,6 @@ import {
     School as SchoolIcon,
     TrendingUp as TrendingIcon,
     EmojiEvents as TrophyIcon,
-    Speed as SpeedIcon,
     Star as StarIcon,
     Assessment as AssessmentIcon
 } from '@mui/icons-material';

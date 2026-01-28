@@ -10,8 +10,7 @@ import {
     ThumbUp as GoodIcon,
     Favorite as EasyIcon,
     ArrowBack as BackIcon,
-    Celebration as CelebrationIcon,
-    Speed as SpeedIcon
+    Celebration as CelebrationIcon
 } from '@mui/icons-material';
 import axios from 'axios';
 import { useAuth } from '../App';
