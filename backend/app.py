@@ -109,20 +109,21 @@ def login_required(f):
 @app.route('/api/auth/register', methods=['POST'])
 def register():
     """Register a new user."""
-    data = request.json
-    username = data.get('username', '').strip()
-    password = data.get('password', '')
-    
-    if not username or not password:
-        return jsonify({'error': 'Username and password required'}), 400
-    
-    if len(username) < 3:
-        return jsonify({'error': 'Username must be at least 3 characters'}), 400
-    
-    if len(password) < 4:
-        return jsonify({'error': 'Password must be at least 4 characters'}), 400
-    
     try:
+        data = request.json
+        logger.info(f"Register attempt data: {data}")
+        username = data.get('username', '').strip()
+        password = data.get('password', '')
+        
+        if not username or not password:
+            return jsonify({'error': 'Username and password required'}), 400
+        
+        if len(username) < 3:
+            return jsonify({'error': 'Username must be at least 3 characters'}), 400
+        
+        if len(password) < 4:
+            return jsonify({'error': 'Password must be at least 4 characters'}), 400
+        
         conn = get_db()
         cursor = conn.cursor()
         
@@ -130,7 +131,7 @@ def register():
         cursor.execute('SELECT id FROM users WHERE username = ?', (username,))
         if cursor.fetchone():
             return jsonify({'error': 'Username already exists'}), 400
-        
+            
         # Create user
         password_hash = generate_password_hash(password)
         cursor.execute(
@@ -138,6 +139,9 @@ def register():
             (username, password_hash)
         )
         conn.commit()
+    except Exception as e:
+        logger.error(f"Registration error: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
         user_id = cursor.lastrowid
         conn.close()
         
